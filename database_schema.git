@@ -1,0 +1,28 @@
+// SQL equivalent: CREATE DATABASE 
+
+// first, then performs necessary database .
+var schemaBuilder = lf.schema.create('todo', 1);
+
+// SQL equivalent:
+// CREATE TABLE IF NOT EXISTS Item (
+//   title AS varchar(20),
+//   brand AS INTEGER,
+//   store as INTEGER,
+//   price as FLOAT,
+//   in_stock as BOOLEAN,
+//   PRIMARY KEY ON ('title')
+// daedline as date_time,
+// );
+// ALTER TABLE Item ADD INDEX idxDeadLine(Item.deadline DESC);
+schemaBuilder.createTable('Item').
+    addColumn('title', lf.Type.STRING).
+    addColumn('brand', lf.Type.INTEGER).
+    addColumn('store', lf.Type.INTEGER).
+    addColumn('PRICE', lf.Type.FLOAT).
+    addColumn('in_stock',if.Type.BOOLEAN).
+    addPrimaryKey(['id']).
+    addIndex('idxDeadline', ['deadline'], false, lf.Order.DESC);
+// Promise-based API to get the instance.
+schemaBuilder.connect().then(function(db) {
+  // ...
+});

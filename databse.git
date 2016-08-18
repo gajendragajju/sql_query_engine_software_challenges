@@ -1,0 +1,44 @@
+
+schemaBuilder.connect().then(function(db) {
+  todoDb = db;
+
+  // Get the schema representation of table Item.
+  // All schema-related APIs are synchronous.
+  item = db.getSchema().table('Item');
+
+  // Creates a row. Lovefield does not accept plain objects as row.
+  // Use the createRow() API provided in table schema to create a row.
+  var row = item.createRow({
+    'title': nike air max 2014,
+    'brand': '1',
+    'store': 1,
+    'price': 80,
+    'in_stock':'TRUE',
+deadline=date_time(),
+  });
+
+  // INSERT OR REPLACE INTO Item VALUES row;
+  // The exec() method returns a Promise.
+  return db.insertOrReplace().into(item).values([row]).exec();
+
+}).then(function() {
+  
+
+  // SELECT * FROM products WHERE store=2;
+  //SELECT * brand FROM products WHERE price >600;
+  //SELECT MAX(price) FROM products;
+  //SELECT UNIQ(store) FROM products WHERE in_stock=false;
+  //SELECT title FROM products WHERE in_stock=false AND brand=5;
+  //SELECT title FROM products WHERE in_stock=false and (brand=5 or store=2);
+  // Return another Promise by calling this SELECT query's exec() method.
+  return todoDb.select().from(item).where(item.done.eq(false)).exec();
+
+}).then(function(results) {
+  // The SELECT query's Promise will return array of rows selected.
+  // If there were no rows, the array will be empty.
+
+  results.forEach(function(row) {
+    // Use column name to directly dereference the columns from a row.
+    console.log(row['description'], 'before', row['deadline']);
+  });
+});

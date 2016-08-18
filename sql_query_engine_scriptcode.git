@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="databse.txt" />
+    <title>venturesity software challenges</title>
+    <script src="bower_components/lovefield/dist/lovefield.min.js"></script>
+  </head>
+  <body>
+    <script>
+
+var schemaBuilder = lf.schema.create('todo', 1);
+
+schemaBuilder.createTable('Item').
+    addColumn('title', lf.Type.STRING).
+    addColumn('brand', lf.Type.INTEGER).
+    addColumn('store', lf.Type.INTEGER).
+    addColumn('price', lf.Type.FLOAT).
+    addColumn('in_stock',if.Type.BOOLEAN).
+    addPrimaryKey(['title']).
+    addIndex('idxDeadline', ['deadline'], false, lf.Order.DESC);
+
+var todoDb;
+var item;
+schemaBuilder.connect().then(function(db) {
+  todoDb = db;
+  item = db.getSchema().table('Item');
+  var row = item.createRow({
+    'title': 1,
+    'brand': 'Get a brand number',
+    'store': GetStoreValue(),
+    'in_stock': boolean
+  });
+
+  return db.insertOrReplace().into(item).values([row]).exec();
+}).then(function() {
+  return todoDb.select().from(products).where(store.done.eq(2)).exec();
+ return todoDb.select(). brand from(products).where(price.done.eq(>600)).exec();
+ return todoDb.select(). MAX price from(products).exec();
+ return todoDb.select().UNIQ(store) from(products).where(in_stock.done.eq(false)).exec();
+ return todoDb.select(). title from(products).where(in_stock.done.eq(false) & (brand==5)).exec();
+return todoDb.select(). title from(products).where(in_stock.done.eq(false) & (brand==5 | store==2)).exec();
+}).then(function(results) {
+  results.forEach(function(row) {
+    console.log(row['description'], 'before', row['deadline']);
+  });
+});
+
+    </script>
+  </body>
+</html>
